@@ -1,8 +1,10 @@
 package com.sw.productcatalogservice.controllers;
 
+import com.sw.productcatalogservice.dtos.ProductDto;
 import com.sw.productcatalogservice.models.Product;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.sw.productcatalogservice.service.IProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,17 +12,22 @@ import java.util.List;
 @RestController
 public class ProductController {
 
-    @GetMapping("/products")
-    public List<Product> getAllProducts(){
-        Product product = new Product();
-        product.setId(1L);
-        product.setName("Apple");
-        product.setDescription("Iphone 16");
-        product.setPrice(15.0);
+    @Autowired
+    IProductService productService;
 
-        List<Product> productList = new ArrayList<>();
-        productList.add(product);
-        return productList;
+    @GetMapping("/products")
+    public List<ProductDto> getAllProducts(){
+        return null;
+    }
+
+    @GetMapping("/products/{id}")
+    public ProductDto getProductById(@PathVariable("id") Long productId){
+        return null;
+    }
+
+    @PostMapping("/products")
+    public ProductDto createProduct(@RequestBody ProductDto productDto){
+        return productDto;
     }
 
 }
