@@ -57,6 +57,7 @@ public class ProductController {
         Product output = productService.replaceProduct(product,id);
         return from(output);
     }
+
     private Product from(ProductDto productDto) {
         Product product = new Product();
         product.setId(productDto.getId());

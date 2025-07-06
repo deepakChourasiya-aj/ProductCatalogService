@@ -21,13 +21,22 @@ public class FakeStoreApiClient {
     @Autowired
     private RestTemplateBuilder restTemplateBuilder;
 
-
     public FakeStoreProductDto replaceFakeStoreProduct(FakeStoreProductDto fakeStoreProductDtoInput,Long id) {
         ResponseEntity<FakeStoreProductDto> fakeStoreProductDtoResponseEntity = requestForEntity(HttpMethod.PUT, "https://fakestoreapi.com/products/{id}", fakeStoreProductDtoInput, FakeStoreProductDto.class, id);
 
         FakeStoreProductDto fakeStoreProductDtoOutput = fakeStoreProductDtoResponseEntity.getBody();
 
         if (validateResponse(fakeStoreProductDtoResponseEntity)){
+            return fakeStoreProductDtoOutput;
+        }
+        return null;
+    }
+
+    public FakeStoreProductDto createFakeStoreProduct(FakeStoreProductDto fakeStoreProductDtoInput) {
+        ResponseEntity<FakeStoreProductDto> fakeStoreProductDtoResponseEntity = requestForEntity(HttpMethod.POST,"https://fakestoreapi.com/products", fakeStoreProductDtoInput, FakeStoreProductDto.class);
+        FakeStoreProductDto fakeStoreProductDtoOutput = fakeStoreProductDtoResponseEntity.getBody();
+
+        if(fakeStoreProductDtoOutput!=null && fakeStoreProductDtoResponseEntity.getStatusCode()==HttpStatus.valueOf(200)){
             return fakeStoreProductDtoOutput;
         }
         return null;

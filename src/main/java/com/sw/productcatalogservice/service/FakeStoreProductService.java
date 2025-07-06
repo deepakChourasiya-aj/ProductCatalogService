@@ -1,5 +1,6 @@
 package com.sw.productcatalogservice.service;
 
+import com.sw.productcatalogservice.client.FakeStoreApiClient;
 import com.sw.productcatalogservice.dtos.CategoryDto;
 import com.sw.productcatalogservice.dtos.FakeStoreProductDto;
 import com.sw.productcatalogservice.models.Category;
@@ -19,6 +20,8 @@ public class FakeStoreProductService implements IProductService{
     @Autowired
     private RestTemplateBuilder restTemplateBuilder;
 
+    @Autowired
+    private FakeStoreApiClient fakeStoreApiClient;;
 
     @Override
     public Product getProductById(Long id){
@@ -37,22 +40,17 @@ public class FakeStoreProductService implements IProductService{
     @Override
     public Product createProduct(Product input) {
         FakeStoreProductDto fakeStoreProductDtoInput = from(input);
-
-        RestTemplate restTemplate = restTemplateBuilder.build();
-
-        ResponseEntity<FakeStoreProductDto> fakeStoreProductDtoResponseEntity = restTemplate.postForEntity("https://fakestoreapi.com/products",fakeStoreProductDtoInput, FakeStoreProductDto.class);
-        FakeStoreProductDto fakeStoreProductDtoOutput = fakeStoreProductDtoResponseEntity.getBody();
-
-        if(fakeStoreProductDtoOutput!=null && fakeStoreProductDtoResponseEntity.getStatusCode() == HttpStatus.valueOf(200)){
-            return from(fakeStoreProductDtoOutput);
-        }
-        return null;
+        FakeStoreProductDto output = fakeStoreApiClient.createFakeStoreProduct(fakeStoreProductDtoInput);
+        if(output==null) return null;
+        return from(output);
     }
 
     @Override
     public Product replaceProduct(Product input,Long id){
         FakeStoreProductDto fakeStoreProductDtoInput = from(input);
-        return null;
+        FakeStoreProductDto output = fakeStoreApiClient.replaceFakeStoreProduct(fakeStoreProductDtoInput,id);
+        if(output==null) return null;
+        return from(output);
     }
 
     @Override
