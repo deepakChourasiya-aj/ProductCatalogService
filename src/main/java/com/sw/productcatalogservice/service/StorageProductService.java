@@ -25,7 +25,6 @@ public class StorageProductService implements IProductService{
 
     @Override
     public Product createProduct(Product product){
-        System.out.println("At Storage product service createProduct " + product.getName());
         Optional<Product> optionalProduct = productRepository.findById(product.getId());
         if(optionalProduct.isEmpty()) return productRepository.save(product);
         return optionalProduct.get();

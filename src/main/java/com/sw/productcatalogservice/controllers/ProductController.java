@@ -45,7 +45,6 @@ public class ProductController {
 
     @PostMapping("/products")
     public ProductDto createProduct(@RequestBody ProductDto productDto){
-        System.out.println("At product creation controller");
         Product product = from(productDto);
         Product output = productService.createProduct(product);
         if(output==null) return null;
