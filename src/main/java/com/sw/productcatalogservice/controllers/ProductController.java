@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -20,7 +21,13 @@ public class ProductController {
 
     @GetMapping("/products")
     public List<ProductDto> getAllProducts(){
-        return null;
+        List<ProductDto> productDtoList = new ArrayList<>();
+        List<Product> products = productService.getAllProducts();
+        for (Product product : products) {
+            ProductDto productDto = from(product);
+            productDtoList.add(productDto);
+        }
+        return productDtoList;
     }
 
     @GetMapping("/products/{id}")
