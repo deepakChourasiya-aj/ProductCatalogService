@@ -31,7 +31,7 @@ public class FakeStoreProductService implements IProductService{
 
         FakeStoreProductDto fakeStoreProductDto = fakeStoreProductDtoResponseEntity.getBody();
 
-        if(fakeStoreProductDto!=null && fakeStoreProductDtoResponseEntity.getStatusCode()== HttpStatus.valueOf(200)){
+        if(fakeStoreProductDto!=null && fakeStoreProductDtoResponseEntity.getStatusCode() == HttpStatus.valueOf(200)){
             return from(fakeStoreProductDto);
         }
 

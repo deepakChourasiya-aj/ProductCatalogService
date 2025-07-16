@@ -6,13 +6,10 @@ import com.sw.productcatalogservice.models.Category;
 import com.sw.productcatalogservice.models.Product;
 import com.sw.productcatalogservice.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -21,7 +18,6 @@ public class ProductController {
     @Autowired
     IProductService productService;
 
-
     @GetMapping("/products")
     public List<ProductDto> getAllProducts(){
         return null;
@@ -29,8 +25,7 @@ public class ProductController {
 
     @GetMapping("/products/{id}")
     public ResponseEntity<ProductDto> getProductById(@PathVariable("id") Long productId)  {
-//        try{
-            if(productId<=0){
+            if(productId <= 0){
                 throw new IllegalArgumentException("Product Id not found");
             }
             Product product = productService.getProductById(productId);
@@ -38,9 +33,6 @@ public class ProductController {
 
             ProductDto productDto = from(product);
             return new ResponseEntity<>(productDto, HttpStatus.OK);
-//        }catch (IllegalArgumentException exception){
-//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//        }
     }
 
     @PostMapping("/products")
