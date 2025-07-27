@@ -27,7 +27,6 @@ public class ProductController {
 
     @GetMapping("/products/{id}")
     public ResponseEntity<ProductDto> getProductById(@PathVariable("id") Long productId)  {
-//        try{
             if(productId<=0){
                 throw new IllegalArgumentException("Product Id not found");
             }
@@ -36,9 +35,6 @@ public class ProductController {
 
             ProductDto productDto = from(product);
             return new ResponseEntity<>(productDto, HttpStatus.OK);
-//        }catch (IllegalArgumentException exception){
-//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//        }
     }
 
     @PostMapping("/products")
