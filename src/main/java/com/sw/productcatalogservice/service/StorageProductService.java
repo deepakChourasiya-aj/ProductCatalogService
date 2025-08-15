@@ -45,7 +45,7 @@ public class StorageProductService implements IProductService{
     }
 
     @Override
-    public Product getProductBasedOnUserScope(Long userId, Long productId){
-
+    public Product getProductDetailsBasedOnUserScope(Long userId, Long productId) {
+        return null;
     }
 }
