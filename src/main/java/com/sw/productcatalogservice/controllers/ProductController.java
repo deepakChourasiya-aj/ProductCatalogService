@@ -19,9 +19,9 @@ public class ProductController {
     @Autowired
     IProductService productService;
 
-    @GetMapping("/{userId}/{productId}")
+    @GetMapping("/products/{userId}/{productId}")
     public ProductDto getProductDetailsBasedOnUserScope(@PathVariable Long userId,@PathVariable Long productId){
-        
+        return from(productService.getProductDetailsBasedOnUserScope(userId,productId));
     }
 
     @GetMapping("/products")
