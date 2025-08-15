@@ -43,4 +43,9 @@ public class StorageProductService implements IProductService{
     public List<Product> getAllProducts(){
         return productRepository.findAll();
     }
+
+    @Override
+    public Product getProductBasedOnUserScope(Long userId, Long productId){
+
+    }
 }

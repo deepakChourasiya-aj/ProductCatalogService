@@ -59,6 +59,11 @@ public class FakeStoreProductService implements IProductService{
         return List.of();
     }
 
+    @Override
+    public Product getProductDetailsBasedOnUserScope(Long userId, Long productId) {
+        return null;
+    }
+
     private FakeStoreProductDto from(Product product){
         FakeStoreProductDto fakeStoreProductDto = new FakeStoreProductDto();
         fakeStoreProductDto.setId(product.getId());
