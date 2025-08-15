@@ -26,8 +26,7 @@ public class StorageProductService implements IProductService{
     @Override
     public Product createProduct(Product product){
         Optional<Product> optionalProduct = productRepository.findById(product.getId());
-        if(optionalProduct.isEmpty()) return productRepository.save(product);
-        return optionalProduct.get();
+        return optionalProduct.orElseGet(() -> productRepository.save(product));
     }
 
     @Override
@@ -46,6 +45,14 @@ public class StorageProductService implements IProductService{
 
     @Override
     public Product getProductDetailsBasedOnUserScope(Long userId, Long productId) {
-        return null;
+        Optional<Product> optionalProduct = productRepository.findById(productId);
+        return optionalProduct.orElse(null);
+
+    }
+
+    @Override
+    public Product getProductBasedOnUserScope(Long userId, Long productId) {
+        Optional<Product> optionalProduct = productRepository.findById(productId);
+        return optionalProduct.orElse(null);
     }
 }
