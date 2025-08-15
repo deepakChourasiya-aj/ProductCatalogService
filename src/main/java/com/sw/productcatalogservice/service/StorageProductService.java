@@ -47,12 +47,6 @@ public class StorageProductService implements IProductService{
     public Product getProductDetailsBasedOnUserScope(Long userId, Long productId) {
         Optional<Product> optionalProduct = productRepository.findById(productId);
         return optionalProduct.orElse(null);
-
     }
 
-    @Override
-    public Product getProductBasedOnUserScope(Long userId, Long productId) {
-        Optional<Product> optionalProduct = productRepository.findById(productId);
-        return optionalProduct.orElse(null);
-    }
 }

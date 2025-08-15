@@ -16,5 +16,4 @@ public interface IProductService {
 
     Product getProductDetailsBasedOnUserScope(Long userId, Long productId);
 
-    Product getProductBasedOnUserScope(Long userId, Long productId);
 }
