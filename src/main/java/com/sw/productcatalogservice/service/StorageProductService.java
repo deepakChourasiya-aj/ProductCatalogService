@@ -46,6 +46,9 @@ public class StorageProductService implements IProductService{
     @Override
     public Product getProductDetailsBasedOnUserScope(Long userId, Long productId) {
         Optional<Product> optionalProduct = productRepository.findById(productId);
+        // Perform the logic below..
+        System.out.println(optionalProduct.get().toString()+" Name from getProductDetailsBasedOnUserScope service");
+
         return optionalProduct.orElse(null);
     }
 
