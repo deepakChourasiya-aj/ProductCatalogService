@@ -7,6 +7,7 @@ import com.sw.productcatalogservice.models.Category;
 import com.sw.productcatalogservice.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -30,7 +31,7 @@ public class FakeStoreProductService implements IProductService{
 
         FakeStoreProductDto fakeStoreProductDto = fakeStoreProductDtoResponseEntity.getBody();
 
-        if(fakeStoreProductDto!=null && fakeStoreProductDtoResponseEntity.getStatusCode()== HttpStatus.valueOf(200)){
+        if(fakeStoreProductDto!=null && fakeStoreProductDtoResponseEntity.getStatusCode() == HttpStatus.valueOf(200)){
             return from(fakeStoreProductDto);
         }
 
@@ -54,8 +55,13 @@ public class FakeStoreProductService implements IProductService{
     }
 
     @Override
-    public List<Product> getAllProduct() {
+    public List<Product> getAllProducts() {
         return List.of();
+    }
+
+    @Override
+    public Product getProductDetailsBasedOnUserScope(Long userId, Long productId) {
+        return null;
     }
 
     private FakeStoreProductDto from(Product product){

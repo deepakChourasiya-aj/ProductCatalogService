@@ -19,15 +19,25 @@ public class ProductController {
     @Autowired
     IProductService productService;
 
+    @GetMapping("/products/{userId}/{productId}")
+    public ProductDto getProductDetailsBasedOnUserScope(@PathVariable Long userId,@PathVariable Long productId){
+        return from(productService.getProductDetailsBasedOnUserScope(userId,productId));
+    }
 
     @GetMapping("/products")
     public List<ProductDto> getAllProducts(){
-        return null;
+        List<ProductDto> productDtoList = new ArrayList<>();
+        List<Product> products = productService.getAllProducts();
+        for (Product product : products) {
+            ProductDto productDto = from(product);
+            productDtoList.add(productDto);
+        }
+        return productDtoList;
     }
 
     @GetMapping("/products/{id}")
     public ResponseEntity<ProductDto> getProductById(@PathVariable("id") Long productId)  {
-            if(productId<=0){
+            if(productId <= 0){
                 throw new IllegalArgumentException("Product Id not found");
             }
             Product product = productService.getProductById(productId);
